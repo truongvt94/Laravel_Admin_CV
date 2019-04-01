@@ -5,9 +5,12 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
+    use SoftDeletes;
     use Notifiable;
 
     /**
@@ -15,8 +18,9 @@ class User extends Authenticatable
      *
      * @var array
      */
+    const PAGINATE = 5;
     protected $fillable = [
-        'name', 'email', 'password',
+    'name', 'email', 'password', 'slug', 'phone', 'email_verified_at', 'password_verified_at', 'avatar', 'type',
     ];
 
     /**
@@ -25,7 +29,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+    'password', 'remember_token',
     ];
 
     /**
@@ -34,15 +38,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'string',
-        'password_verified_at' => 'string',
+    'email_verified_at' => 'string',
+    'password_verified_at' => 'string',
     ];
 
     public $timestamps = true;
 
-    /*public static function searchdb($query, $keyword){
-        return $query->where('name','like','%' .$keyword. '%')
-                     ->orWhere('email', 'like', '%' .$keyword. '%');
-        ;
-    }*/
+    protected $softDelete = true;
 }

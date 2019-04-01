@@ -25,6 +25,10 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        //super, admin, hr, member
+
+        /*Gate::difine('update-profile', function($user, $sumary){
+            return $user->id == $sumary->id;
+        });*/
     }
 }
