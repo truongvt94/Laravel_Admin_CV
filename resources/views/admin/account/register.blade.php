@@ -4,7 +4,7 @@
 	<form action="{{ route('postRegister') }}" method="post">
 		<h2 class="text-center">Infor Register</h2>
 
-		@include('eror.eror')
+		@include('error.error')
 
 		<div class="form-group">
 			<input type="text" class="form-control" placeholder="Enter name" name="name" required="required">

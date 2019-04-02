@@ -6,9 +6,9 @@
 </div>
 
 @if(Session::has('success'))
-	<div class="alert alert-success">
-		{{ Session::get('success') }}
-	</div>
+<div class="alert alert-success">
+	{{ Session::get('success') }}
+</div>
 @endif
 
 <table class="table table-striped">
@@ -26,14 +26,14 @@
 	<tbody>
 		@foreach($user as $key)
 		<tr>
-			<th scope="row">{{$key->id}}</th>
-			<td>{{$key->name}}</td>
-			<td>{{$key->email}}</td>
-			<td>{{$key->phone}}</td>
-			<td>{{$key->type}}</td>
-			<td>{{$key->avatar}}</td>
-			<td class="text-center"><a href="{!! route('update',$key->id) !!}" ><i class="fas fa-edit"></i></a>
-				<a onclick="return ConfirmDelete('Delete Y/N')" href="{!! route('delete',$key->id) !!}"><i class="far fa-trash-alt"></i></button></a>
+			<th scope="row">{{ $key->id }}</th>
+			<td>{{ $key->name }}</td>
+			<td>{{ $key->email }}</td>
+			<td>{{ $key->phone }}</td>
+			<td>{{ $key->type }}</td>
+			<td>{{ $key->avatar }}</td>
+			<td class="text-center"><a href="{!! route('user.update',$key->id) !!}" ><i class="fas fa-edit"></i></a>
+				<a onclick="return ConfirmDelete('Delete Y/N')" href="{!! route('user.destroy',$key->id) !!}"><i class="far fa-trash-alt"></i></button></a>
 			</td>
 		</tr>
 		@endforeach

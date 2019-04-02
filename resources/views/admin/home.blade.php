@@ -38,7 +38,7 @@
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="{!! route('user') !!}">
+            <a class="nav-link" href="{!! route('user.index') !!}">
               <i class="material-icons">person</i>
               <p>User Profile</p>
             </a>

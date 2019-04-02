@@ -15,6 +15,12 @@ class CreatePortfolioTable extends Migration
     {
         Schema::create('portfolio', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name',100)->unique();
+            $table->string('slug');
+            $table->datetime('date_start');
+            $table->datetime('date_end');
+            $table->boolean('is_featured');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

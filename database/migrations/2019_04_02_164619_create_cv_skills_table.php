@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSumaryTable extends Migration
+class CreateCvSkillsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateSumaryTable extends Migration
      */
     public function up()
     {
-        Schema::create('sumary', function (Blueprint $table) {
+        Schema::create('cv_skills', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
-            $table->string('content');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ class CreateSumaryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sumary');
+        Schema::dropIfExists('cv_skills');
     }
 }

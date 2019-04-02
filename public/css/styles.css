@@ -1,18 +1,3 @@
-h1 {
-	font-weight: bold !important;
-	color: #2E2EFE !important;
-}
-
-table {
-	color: black;
-	font-family: tahoma;
-	font-size: 14px;
-}
-
-table thead {
-	background: #01DFD7;
-}
-
 .frm-add {
 	width: 50% !important;
 	margin: 0 auto;

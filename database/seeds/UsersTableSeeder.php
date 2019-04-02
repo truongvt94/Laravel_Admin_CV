@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder
             'avatar' => 'img123.jpg',
             'password' => bcrypt('1234'),
             'password_verified_at' => bcrypt('1234')
-            ]
+            ],
             ]);
     }
 

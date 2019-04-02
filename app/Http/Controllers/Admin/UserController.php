@@ -9,6 +9,7 @@ use App\User;
 use SoftDeletes;
 use App\Http\Controllers\Hash;
 use App\Http\Requests\UsersRequest;
+use App\Http\Requests\EditUserRequest;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class UserController extends Controller
 {
-    public function user()
+    public function index()
     {
     	$show = User::paginate(User::PAGINATE);
     	return view('admin.user.list', compact('show'));
@@ -27,16 +28,15 @@ class UserController extends Controller
     	return view('admin.user.add');
     }
 
-    public function postCreat(UsersRequest $request)
-    {
-        
-        $userimg = '';
+    public function store(UsersRequest $request)
+    { 
+        $img = '';
         if ($request->hasFile('avatar')) 
         {
             $fileExtension = '.'.$request->avatar->extension(); 
             $imageName = 'img'.uniqid().$fileExtension;
             $request->file('avatar')->storeAs('', $imageName, 'avatar_upload');
-            $userimg = $imageName;
+            $img = $imageName;
         }
         User::create([
             'name' => $request->name,
@@ -48,40 +48,39 @@ class UserController extends Controller
             'password' => bcrypt($request->password),
             'password_verified_at' => bcrypt($request->password_verified_at),
             'type' => $request->type,
-            'avatar' => $userimg
+            'avatar' => $img
             ]);
         return redirect()->back()->with('success', __('messages.insert'));
     }
 
-    public function update($id)
+    public function edit($id)
     {
         $user = User::findOrFail($id);
         return view('admin.user.edit', compact('user'));
     }
 
-    public function postUpdate(UsersRequest $request, $id)
+    public function update(EditUserRequest $request, $id)
     {
-
-        User::findOrFail($request->id)
-            ->update($request->all());
-            return redirect()->back()->with('success', __('messages.edit'));
-        }
-
-        public function delete($id)
-        {
-            $user = User::findOrFail($id)->delete();
-            return redirect()->back()->with('success', __('messages.delete'));
-        }
-
-        public function search(Request $request)
-        {
-            $keyword = $request->input('keyword');
-            $user = User::where('name', 'like', "%$keyword%")
-            ->orWhere('email', 'like', "%$keyword%")->paginate(User::PAGINATE);
-            $data = [
-            'user' => $user,
-            'keyword' => $keyword
-            ];
-            return view('admin.user.search', $data);
-        }
+        User::findOrFail($id)
+        ->update($request->all());
+        return redirect()->back()->with('success', __('messages.edit'));
     }
+
+    public function destroy($id)
+    {
+        User::findOrFail($id)->delete();
+        return redirect()->back()->with('success', __('messages.delete'));
+    }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $user = User::where('name', 'like', "%$keyword%")
+        ->orWhere('email', 'like', "%$keyword%")->paginate(User::PAGINATE);
+        $data = [
+        'user' => $user,
+        'keyword' => $keyword
+        ];
+        return view('admin.user.search', $data);
+    }
+}

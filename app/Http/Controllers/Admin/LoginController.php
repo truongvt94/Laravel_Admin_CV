@@ -11,7 +11,6 @@ use App\Http\Requests\UsersRequest;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Http\Controllers\Admin\LoginController;
-use App;
 
 class LoginController extends Controller
 {
@@ -19,7 +18,7 @@ class LoginController extends Controller
 	{
 		if(!Auth::check())
 		{
-			return view('admin.login.login');
+			return view('admin.account.login');
 		}
 		else
 		{
@@ -30,18 +29,14 @@ class LoginController extends Controller
 	public function postLogin(Request $request)
 	{
 		$data = [
-		'email'=>$request->email,
-		'password'=>$request->password,
+		'email' => $request->email,
+		'password' => $request->password,
 		];
 		if(Auth::attempt($data)){
-			/*$remember = $request->remember_token;
-			if(!empty($remember)){
-				Auth::login(Auth::user()->id, true);
-			}*/
-			return redirect('admin');
+			return redirect()->route('admin');
 		}
 		else {
-			return redirect()->back()->with('eror', __('messages.register_error'));
+			return redirect()->back()->with('error', __('messages.register_error'));
 		}
 	}
 
@@ -68,7 +63,7 @@ class LoginController extends Controller
 
 	public function register()
 	{
-		return view('admin.login.register');
+		return view('admin.account.register');
 	}
 
 	public function postRegister(RegisterRequest $request)

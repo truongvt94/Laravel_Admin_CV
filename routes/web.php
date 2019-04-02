@@ -32,15 +32,8 @@ Route::group(['middleware' => 'auth'], function(){
         });
 
         Route::group(['prefix' => ''],function(){
-            Route::get('/user', 'UserController@user')->name('user');
-            Route::get('/create', 'UserController@create')->name('create');
-            Route::post('/postCreat','UserController@postCreat')->name('postCreat');
-
-            Route::get('/update/{id}', 'UserController@update')->name('update');
-            Route::post('/postUpdate/{id}', 'UserController@postUpdate')->name('postUpdate');
-
-            Route::get('/delete/{id}', 'UserController@delete')->name('delete');
-
+            Route::get('admin', 'UserController@index')->name('admin');
+            Route::resource('user','UserController');
             Route::get('/search', 'UserController@search')->name('search');
         });
     });

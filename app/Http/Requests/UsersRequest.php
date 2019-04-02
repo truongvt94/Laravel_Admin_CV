@@ -26,12 +26,12 @@ class UsersRequest extends FormRequest
      public function rules()
     {
         return [
-            'name' => 'required',
+            'name' => 'required|min:5|max:100',
             'email' => 'required|unique:users,email,'.$this->id,
             'email_verified_at' => 'required|same:email',
-            'phone' => 'required|numeric',
+            'phone' => 'required|numeric|min:8',
             'date' => 'required',
-            'password' => 'required',
+            'password' => 'required|min:10',
             'password_verified_at' => 'required|same:password',
         ];
     }

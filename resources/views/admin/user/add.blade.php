@@ -1,7 +1,7 @@
 @extends('Admin.Home')
 @section('content')
 <h1 class="text-center">Thêm User</h1><br>
-<form class="frm-add" method="post" enctype="multipart/form-data" action="{{route('postCreat')}}">
+<form class="frm-add" method="post" enctype="multipart/form-data" action="{{route('user.store')}}">
 
   @if(Session::has('success'))
   <div class="alert alert-success">
@@ -9,7 +9,7 @@
   </div>
   @endif
   
-  @include('eror.eror')
+  @include('error.error')
   <div class="form-group">
     <input type="text" class="form-control" name="name" required="required" placeholder="Enter name...">
   </div>     
@@ -20,7 +20,7 @@
     <input type="email" class="form-control" name="email" required="required" placeholder="Enter email...">
   </div>
   <div class="form-group">
-  <input type="email" class="form-control" name="email_verified_at" required="required" placeholder="Enter confirm email...">
+    <input type="email" class="form-control" name="email_verified_at" required="required" placeholder="Enter confirm email...">
   </div>
   <div class="form-group">
     <input type="password" class="form-control" name="password" required="required" placeholder="Enter password...">
