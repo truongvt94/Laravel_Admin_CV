@@ -45,4 +45,10 @@ class User extends Authenticatable
     public $timestamps = true;
 
     protected $softDelete = true;
+
+    protected $table = "users";
+
+    public function cvs(){
+        return $this->hasMany('App\Models\CV', 'user_id', 'id');
+    }
 }

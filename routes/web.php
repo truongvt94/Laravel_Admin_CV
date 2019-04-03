@@ -36,5 +36,10 @@ Route::group(['middleware' => 'auth'], function(){
             Route::resource('user','UserController');
             Route::get('/search', 'UserController@search')->name('search');
         });
+
+        Route::group(['prefix' => ''],function(){
+            Route::resource('refer','ReferController');
+            /*Route::get('/search', 'ReferController@search')->name('search');*/
+        });
     });
 });

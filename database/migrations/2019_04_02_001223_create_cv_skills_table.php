@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateReferencesTable extends Migration
+class CreateCvSkillsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateReferencesTable extends Migration
      */
     public function up()
     {
-        Schema::create('references', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('avatar');
-            $table->longText('content');
+        Schema::create('cv_skills', function (Blueprint $table) {
             $table->unsignedBigInteger('cvs_id');
-            $table->foreign('cvs_id')
-            ->references('id')->on('cvs')
-            ->onDelete('cascade');
+            $table->foreign('cvs_id')->references('id')->on('cvs')->onDelete('cascade');
+            $table->unsignedBigInteger('skills_id');
+            $table->foreign('skills_id')->references('id')->on('skills')->onDelete('cascade');
+            $table->integer('percent');
+            $table->primary(array('cvs_id','skills_id'));
             $table->softDeletes();
             $table->timestamps();
         });
@@ -33,6 +32,6 @@ class CreateReferencesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('references');
+        Schema::dropIfExists('cv_skills');
     }
 }
