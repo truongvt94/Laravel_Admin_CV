@@ -11,15 +11,15 @@ class PortfolioTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('portfolio')->insert([
+        DB::table('portfolios')->insert([
             [
             'name' => 'Project 1',
             'slug' => 'project-1',
             'date_start' => '2016/05/05',
             'date_end' => '2017/05/05',
-            'is_featured' => '1',
-            'cvs_id' => '1',
+            'is_feature' => '1',
+            'cv_id' => '1',
             ],
-        ]);
+            ]);
     }
 }

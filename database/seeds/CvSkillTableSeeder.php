@@ -11,10 +11,10 @@ class CvSkillTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('cv_skills')->insert([
+        DB::table('cv_skill')->insert([
             [
-            'cvs_id' => '1',
-            'skills_id' => '1',
+            'cv_id' => '1',
+            'skill_id' => '1',
             'percent' => '50',
             ],
         ]);

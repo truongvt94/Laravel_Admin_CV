@@ -15,8 +15,8 @@ class ReferencesTableSeeder extends Seeder
             [
             'avatar' => 'img.jpg',
             'content' => 'Description',
-            'cvs_id' => '1',
+            'cv_id' => '1',
             ],
-        ]);
+            ]);
     }
 }

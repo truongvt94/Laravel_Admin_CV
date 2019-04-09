@@ -1,11 +1,17 @@
 @extends('Admin.Home')
 @section('content')
-<h1 class="text-center">Thêm User</h1><br>
+<h1 class="text-center">Add User</h1><br>
 <form class="frm-add" method="post" enctype="multipart/form-data" action="{{route('user.store')}}">
 
   @if(Session::has('success'))
   <div class="alert alert-success">
     {{ Session::get('success') }}
+  </div>
+  @endif
+
+  @if(Session::has('error'))
+  <div class="alert alert-danger">
+    {{ Session::get('error') }}
   </div>
   @endif
   
@@ -30,12 +36,14 @@
   </div>
   <input type="text" id="datepicker" name="date" placeholder="Year/ Month/ Day">
   <div class="form-group">
-    <select name="type" class="form-control" id="sel1">
-      <option>--User Decentralization--</option>
-      <option value="super">Super Admin</option>
-      <option value="admin">Admin</option>
-      <option value="hr">Hr</option>
-      <option value="member">Member</option>
+    <select name="type" class="form-control" id="type">
+      <option>--Author--</option>
+      @can('user-add')
+      <option value="1">Super</option>
+      @endcan
+      <option value="2">Admin</option>
+      <option value="3">Hr</option>
+      <option value="4">Member</option>
     </select>
   </div>
   <input type="file" class="fl_avatar form-control-file border" name="avatar">

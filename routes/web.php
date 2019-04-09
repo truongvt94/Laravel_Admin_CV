@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.home.main');
 });
 
 Route::group(['namespace' => 'Admin'], function(){
@@ -26,10 +26,15 @@ Route::group(['namespace' => 'Admin'], function(){
 });
 
 Route::group(['middleware' => 'auth'], function(){
+    Route::group(['prefix' => ''], function(){
+        Route::resource('home', 'HomeController');
+        Route::get('search', 'HomeController@search')->name('timkiem');
+    });
+});
+
+Route::group(['middleware' => 'auth'], function(){
     Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
-        Route::get('/', function(){
-            return view('admin.home.main');
-        });
+        Route::get('/', 'CvController@list')->name('list');
 
         Route::group(['prefix' => ''],function(){
             Route::get('admin', 'UserController@index')->name('admin');
@@ -38,8 +43,11 @@ Route::group(['middleware' => 'auth'], function(){
         });
 
         Route::group(['prefix' => ''],function(){
-            Route::resource('refer','ReferController');
-            /*Route::get('/search', 'ReferController@search')->name('search');*/
+            Route::resource('cv','CvController');
+        });
+
+        Route::group(['prefix' => ''],function(){
+            Route::resource('profile','EditProfileController');
         });
     });
 });

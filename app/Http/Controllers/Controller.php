@@ -9,5 +9,14 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+	public function boot()
+	{
+		$this->registerPolicies();
+
+		Gate::define('update-post', 'App\Policies\PostPolicy@update');
+	}
 }
+
+

@@ -24,15 +24,16 @@
 	<div class="form-group">
 		<input type="email" class="form-control" name="email_verified_at" value="{{ $user->email_verified_at }}" placeholder="Enter email...">
 	</div>
+	@if(Auth::user()->id != $user->id)
 	<div class="form-group">
 		<select name="type" class="form-control">
 			<option>--Author--</option>
-			<option @if($user->type == 'super') selected @endif value="super">Super</option>
-			<option @if($user->type == 'admin') selected @endif value="admin">admin</option>
-			<option @if($user->type == 'hr') selected @endif value="hr">hr</option>
-			<option @if($user->type == 'member') selected @endif value="member">Member</option>
+			<option @if($user->type == 2) checked  @endif @if($user->type == '2') selected @endif value="2">Admin</option>
+			<option @if($user->type == 3) checked  @endif @if($user->type == '3') selected @endif value="3">Hr Hapo</option>
+			<option @if($user->type == 4) checked  @endif @if($user->type == '4') selected @endif value="4">Member</option>
 		</select>
 	</div>
+	@endif
 	<button type="submit" class="btn btn-primary">Edit User</button>
 </div>
 </form>

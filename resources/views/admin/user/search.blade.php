@@ -1,5 +1,16 @@
 @extends('Admin.home')
 @section('content')
+<form action="{!! route('search') !!}" method="get" class="navbar-form form-search">
+	@csrf            
+	<div class="input-group no-border">
+		<input type="text" name="keyword" class="form-control" placeholder="Search...">
+		<button type="submit" class="btn btn-white btn-round btn-just-icon">
+			<i class="material-icons">search</i>
+			<div class="ripple-container"></div>
+		</button>
+	</div>
+</form><br>
+<h1 class="text-center">List User
 <div class="alert alert-success">
 	Keyword Search: {{ $keyword }}<br>
 	Amount record find: {{ count($user) }}

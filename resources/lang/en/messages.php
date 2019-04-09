@@ -7,4 +7,6 @@ return [
 	'delete' => 'Delete success',
 	'edit' => 'Edit success',
 	'insert' => 'Insert success',
+	'authorization' => 'No Authorization change',
+	'super_error' => 'error license...'
 ];

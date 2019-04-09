@@ -7,12 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Portfolio extends Model
 {
     protected $fillable = [
-    'name', 'slug', 'date_start', 'date_end', 'is_featured', 'cvs_id'
+    'name', 'slug', 'date_start', 'date_end', 'is_feature', 'cv_id'
     ];
 
-    protected $table = "portfolio";
-
     public function cvs(){
-    	return $this->belongsTo('App\Models\CV', 'cvs_id', 'id');
+    	return $this->belongsTo('App\Models\Cv', 'cv_id', 'id');
     }
 }

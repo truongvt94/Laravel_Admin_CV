@@ -14,6 +14,7 @@ class SkillTableSeeder extends Seeder
     	DB::table('skills')->insert([
             [
             'name' => 'html/css',
+            'slug' => 'html-css',
             'type' => 'IT'
             ],
             ]);

@@ -33,7 +33,7 @@ class CreateCvsTable extends Migration
             $table->string('work_experience_des');
             $table->string('education_des');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->softDeletes();
             $table->timestamps();
         });

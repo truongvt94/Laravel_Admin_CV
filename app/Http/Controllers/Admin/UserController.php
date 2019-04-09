@@ -25,37 +25,45 @@ class UserController extends Controller
 
     public function create()
     {
-    	return view('admin.user.add');
+        $roles = User::all('type');
+        return view('admin.user.add', compact('roles'));
     }
 
-    public function store(UsersRequest $request)
+    public function store(Request $request)
     { 
-        $img = '';
-        if ($request->hasFile('avatar')) 
-        {
-            $fileExtension = '.'.$request->avatar->extension(); 
-            $imageName = 'img'.uniqid().$fileExtension;
-            $request->file('avatar')->storeAs('', $imageName, 'avatar_upload');
-            $img = $imageName;
+        if($request->type != User::SUPER_ADMIN){
+            $img = '';
+            if ($request->hasFile('avatar')) {
+                $fileExtension = '.'.$request->avatar->extension(); 
+                $imageName = 'img'.uniqid().$fileExtension;
+                $request->file('avatar')->storeAs('', $imageName, 'avatar_upload');
+                $img = $imageName;
+            }
+            User::create([
+                'name' => $request->name,
+                'slug' => str_slug($request->name, '-'),
+                'phone' => $request->phone,
+                'date' => $request->date,
+                'email' => $request->email,
+                'email_verified_at' => $request->email_verified_at,
+                'password' => bcrypt($request->password),
+                'password_verified_at' => bcrypt($request->password_verified_at),
+                'type' => $request->type,
+                'avatar' => $img
+                ]);
+            return redirect()->back()->with('success', __('messages.insert'));
         }
-        User::create([
-            'name' => $request->name,
-            'slug' => str_slug($request->name, '-'),
-            'phone' => $request->phone,
-            'date' => $request->date,
-            'email' => $request->email,
-            'email_verified_at' => $request->email_verified_at,
-            'password' => bcrypt($request->password),
-            'password_verified_at' => bcrypt($request->password_verified_at),
-            'type' => $request->type,
-            'avatar' => $img
-            ]);
-        return redirect()->back()->with('success', __('messages.insert'));
+        
+            return redirect()->back()->with('error', __('messages.super_error'));
+        
     }
 
     public function edit($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($id); 
+        if((Auth::user()->id != User::SUPER_ADMIN) && ($id == User::SUPER_ADMIN || ($user["type"] == User::ADMIN && (Auth::user()->id != $id)) || ($user["type"] == User::ADMIN && (Auth::user()->id != $id)))){
+            return redirect()->back()->with('error', __('messages.authorization'));
+        }
         return view('admin.user.edit', compact('user'));
     }
 
@@ -63,12 +71,16 @@ class UserController extends Controller
     {
         User::findOrFail($id)
         ->update($request->all());
-        return redirect()->back()->with('success', __('messages.edit'));
+        return redirect()->back()->with('success', __('messages.edit'));        
     }
 
     public function destroy($id)
     {
-        User::findOrFail($id)->delete();
+        $user = User::findOrFail($id);
+        if((Auth::user()->id != User::SUPER_ADMIN) && ($id == User::SUPER_ADMIN) || ($user["type"] == User::SUPER_ADMIN)) {
+            return redirect()->back()->with('error', __('messages.authorization'));
+        }
+        $user->delete();
         return redirect()->back()->with('success', __('messages.delete'));
     }
 

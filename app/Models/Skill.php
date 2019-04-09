@@ -7,12 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Skill extends Model
 {
     protected $fillable = [
-    'name', 'type'
+    'name', 'slug', 'type'
     ];
 
-    protected $table = "skills";
-
-    public function cv_skill(){
-    	$this->hasMany('App\Models\CV', 'skills_id', 'id');
+    public function cvSkill(){
+    	$this->hasMany('App\Models\Cv', 'skill_id', 'id');
     }
 }

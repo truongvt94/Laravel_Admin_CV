@@ -19,8 +19,15 @@ class User extends Authenticatable
      * @var array
      */
     const PAGINATE = 5;
+
+    
+    const SUPER_ADMIN = 1;
+    const ADMIN = 2;
+    const HR = 3;
+    const MEMBER = 4;
+
     protected $fillable = [
-    'name', 'email', 'password', 'slug', 'phone', 'email_verified_at', 'password_verified_at', 'avatar', 'type',
+    'name', 'email', 'password', 'slug', 'phone', 'email_verified_at', 'password_verified_at', 'avatar', 'type', 'date'
     ];
 
     /**

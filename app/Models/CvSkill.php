@@ -7,16 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class CvSkill extends Model
 {
     protected $fillable = [
-    'cvs_id', 'skills_id', 'percent'
+    'cv_id', 'skill_id', 'percent'
     ];
 
-    protected $table = "cv_skills";
+    protected $table = "cv_skill";
 
     public function cvs(){
-    	return $this->belongsTo('App\Models\CV', 'cvs_id', 'id');
+    	return $this->belongsTo('App\Models\Cv', 'cv_id', 'id');
     }
 
     public function skill(){
-    	return $this->belongsTo('App\Models\Skill', 'skills_id', 'id');
+    	return $this->belongsTo('App\Models\Skill', 'skill_id', 'id');
     }
 }

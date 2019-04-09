@@ -1,12 +1,32 @@
+@can('show-list')
 @extends('Admin.Home')
 @section('content')
-<h1 class="daylah1 text-center">Danh Sách User</h1>
-<a href="{!! route('user.create') !!}"><button class="btn btn-primary">Add Users</button></a>
+<form action="{!! route('search') !!}" method="get" class="navbar-form form-search">
+	@csrf            
+	<div class="input-group no-border">
+		<input type="text" name="keyword" class="form-control" placeholder="Search...">
+		<button type="submit" class="btn btn-white btn-round btn-just-icon">
+			<i class="material-icons">search</i>
+			<div class="ripple-container"></div>
+		</button>
+	</div>
+</form><br>
+<h1 class="daylah1 text-center">List User</h1>
+
+<a href="{!! route('user.create') !!}"><button class="btn btn-primary">Add User</button></a>
+
 @if(Session::has('success'))
 <div class="alert alert-success">
 	{{ Session::get('success') }}
 </div>
 @endif
+
+@if(Session::has('error'))
+<div class="alert alert-danger">
+	{{ Session::get('error') }}
+</div>
+@endif
+
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -34,6 +54,7 @@
 						<i class="fas fa-edit"></i>
 					</a>
 				</button>
+
 				<form action="{{ route('user.destroy',$key->id) }}" method="post">
 					@csrf
 					@method('DELETE')
@@ -41,6 +62,7 @@
 						<i class="far fa-trash-alt"></i>
 					</button>
 				</form>
+				
 			</td>
 		</tr>
 		@endforeach
@@ -50,3 +72,8 @@
 	{{ $show->links() }}
 </div>
 @endsection
+@else
+<script type="text/javascript" charset="utf-8" async defer>
+	window.location.href = "{{env('APP_URL')}}home";
+</script>
+@endcan
