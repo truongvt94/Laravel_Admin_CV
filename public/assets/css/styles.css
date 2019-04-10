@@ -1,6 +1,6 @@
 h1 {
-  font-weight: bold !important;
-  color: #2E2EFE !important;
+	font-weight: bold !important;
+	color: #2E2EFE !important;
 }
 
 table {
@@ -14,7 +14,7 @@ table thead {
 }
 
 .frm-add {
-	width: 500px;
+	width: 50% !important;
 	margin: 0 auto;
 }
 
@@ -30,7 +30,7 @@ table thead {
 }
 
 .login-form {
-	width: 25%;
+	width: 25% !important;
 	margin: 0 auto;
 }
 

@@ -12,32 +12,46 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.home.main');
 });
 
-Route::group(['namespace' => 'Admin','Middleware'=>'guest'], function () {
-    Route::get('/admin','MainController@getHome')->name('admin');
+Route::group(['namespace' => 'Admin'], function() {
+    Route::get('login','LoginController@login')->name('login');
+    Route::post('postLogin','LoginController@postLogin')->name('postLogin');
 
-    Route::group(['User'], function(){    	
-        Route::get('/index','UserController@index')->name('index');
-    	Route::get('/getCreat','UserController@getCreat')->name('getCreat');
-    	Route::post('/postCreat','UserController@postCreat')->name('postCreat');
+    Route::get('register','LoginController@register')->name('register');
+    Route::post('postRegister','LoginController@postRegister')->name('postRegister');
 
-    	Route::get('/getUpdate/{id}', 'UserController@getUpdate')->name('getUpdate');
-    	Route::post('/postUpdate/{id}', 'UserController@postUpdate')->name('postUpdate');
+    Route::get('logout', 'LoginController@logout')->name('logout');
+});
 
-    	Route::get('/delete/{id}','UserController@delete')->name('delete');
-
-    	Route::get('/search','UserController@search')->name('search');
+Route::group(['middleware' => 'auth'], function() {
+    Route::group(['prefix' => ''], function(){
+        Route::resource('home', 'HomeController');
+        Route::get('search', 'HomeController@search')->name('timkiem');
     });
+});
 
-    Route::group(['login'],function(){
-        Route::get('/login','LoginController@getLogin')->name('login');
-        Route::post('/postLogin','LoginController@postLogin')->name('postLogin');
+Route::group(['middleware' => 'auth'], function() {
+    Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
+        Route::get('/', 'CvController@list')->name('list');
 
-        Route::get('/register','LoginController@getRegister')->name('register');
-        Route::post('/postRegister','LoginController@postRegister')->name('postRegister');
+        Route::group(['prefix' => ''],function() {
+            Route::get('admin', 'UserController@index')->name('admin');
+            Route::resource('user','UserController');
+            Route::get('/search', 'UserController@search')->name('search');
+        });
 
-        Route::get('/logout', 'LoginController@logout')->name('logout');
+        Route::group(['prefix' => ''],function() {
+            Route::resource('cv','CvController');
+        });
+
+        Route::group(['prefix' => ''],function() {
+            Route::resource('profile','EditProfileController');
+        });
+
+        Route::group(['prefix' => ''],function() {
+            Route::resource('daboard','HomeController');
+        });
     });
 });

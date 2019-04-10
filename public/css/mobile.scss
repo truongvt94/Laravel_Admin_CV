@@ -1,0 +1,207 @@
+@media (max-width: 375px) {
+	.header-top {
+		background-size: 100% 175px;
+
+		.header-right {
+			margin-top: -60px;
+		}
+	}
+
+	h1,
+	h4 {
+		font-family: Poppins;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 16px;
+		line-height: normal;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		color: #FFFFFF;
+	}
+
+	h4:before {
+		width: 105px;
+	}
+
+	.item-one {
+		left: -30px;
+
+		&:after {
+			left: -35px;
+		}
+
+		&:before {
+			width: 30px;
+			left: -32px;
+		}
+	}
+
+	.header-left {
+		height: 175px;
+
+		h2 {
+			padding-left: 0;
+			font-size: 16px !important;
+			line-height: normal;
+			letter-spacing: 0.05em;
+			font-weight: bold
+		}
+	}
+
+	.menu {
+		margin-top: 0;
+	}
+
+	.menu-mobile {
+		text-align: center;
+		width: 100%;
+		position: absolute;
+		top: 7px;
+
+		li a {
+			margin-right: 25px;
+			text-decoration: none;
+			color: #ffffff;
+		}
+
+	}
+
+	.avatar-mini {
+		width: 100px;
+		height: 100px;
+
+		.icon-avatar {
+			left: -25px;
+		}
+
+		img {
+			width: 100px;
+			height: 100px;
+			bottom: -50px;
+			left: calc(50% - 50px);
+			margin: 0;
+			z-index: 9999999999;
+		}
+	}
+
+	.portfolio-pc {
+		display: none !important;
+	}
+
+	.infor-table {
+		margin-left: 0;
+	}
+
+	.profestinal-sumary,
+	.professional-skills,
+	.work-experience,
+	.portfolio,
+	.references {
+		padding-bottom: 35px;
+	}
+
+	.btn-profile .btn-edit-profile {
+		margin-bottom: 35px;
+	}
+
+	.btn-sumary {
+		display: flex;
+		justify-content: center;
+
+		.btn-edit-sumary  {
+			margin-right: 0;
+		}
+	}
+
+	.btn-chart,
+	.btn-experince {
+		padding-bottom: 40px;
+	}
+
+	.span-white-per-text {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+
+	.box {
+		width: 83%;
+		left: -25px;
+	}
+
+	.menu-portfolio {
+		margin: 0;
+		padding: 0;
+		margin-left: -20px;
+
+		ul li a {
+			padding-right: 13px;
+		}
+
+		.w-25 {
+			width: 50% !important;
+			padding-right: 0;
+			padding-left: 0;
+		}
+
+		.project-ni {
+			height: 109px;
+		}
+
+		.project-san {
+			height: 219px;
+		}
+
+		.cv-center img {
+			width: 60%;
+		}
+	}
+
+	.references {
+		.slide-img {
+			justify-content: center;
+		}
+
+		.slide-text {
+			padding-right: 0 !important;
+		}
+
+		.owl-dots {
+			bottom: -15px;
+		}
+
+		.slide-text p{
+			margin-right: -20px;
+		}
+
+		.slide-sapn-one {
+			font-size: 60px;
+			left: -28px;
+		}
+
+		.slide-sapn-two {
+			top: 80% !important;
+		}
+
+		.owl-nav {
+			left: 5px;
+		}
+
+		.owl-theme .owl-nav {
+			top: 5%;
+		}
+	}
+}
+
+@media (min-width: 1200px){
+	.container {
+		max-width: 1200px;
+	}
+}
+
+@media (min-width: 1200px){
+	.container-fluid {
+		max-width: 1440px;
+	}
+}
