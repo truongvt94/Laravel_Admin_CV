@@ -21,7 +21,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach($show as $key)
+		@foreach($cvs as $key)
 		<tr>
 			<th scope="row">{{$key->id}}</th>
 			<td>{{ $key->name }}</td>
@@ -49,6 +49,6 @@
 	</tbody>
 </table>
 <div class="row d-flex justify-content-center">
-	{{ $show->links() }}
+	{{ $cvs->links() }}
 </div>
 @endsection

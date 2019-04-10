@@ -2,6 +2,7 @@
 @section('content')
 <div class="login-form">
 	<form action="{!! route('postLogin') !!}" method="post">
+	@csrf
 		<h2 class="text-center">Log in</h2>
 
 		@if(Session::has('success'))
@@ -23,17 +24,24 @@
 			{{ Session::get('error') }}
 		</div>
 		@endif
-
+		
 		<div class="form-group">
-			@csrf
 			<button type="submit" class="btn btn-primary btn-block">Log in</button>
 		</div>
-		
-		<div class="clearfix">
-			<label class="pull-left checkbox-inline">
-				<input type="checkbox" name="remember"> Remember me
-			</label>
-		</div>        
+		<div class="form-group row">
+			<div class="col-md-6 offset-md-4">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+					<label class="form-check-label" for="remember">
+						{{ __('Remember Me') }}
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group row mb-0">
+
+		</div>
 	</form>
 	<br>
 	<p class="text-center"><a href="{!! route('register') !!}">Create an Account</a></p>

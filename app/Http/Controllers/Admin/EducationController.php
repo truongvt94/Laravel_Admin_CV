@@ -10,18 +10,21 @@ use App\Http\Controllers\Controller;
 
 class EducationController extends Controller
 {
-    public function index(){
-    	$show = Education::paginate(5);
+    public function index() 
+    {
+    	$educations = Education::paginate(Education::PAGINATE);
     	return view('admin.education.index', compact('show'));
     }
 
-    public function create(){
-    	$cv = Cv::all('id', 'name');
-    	$university = University::all('id', 'name');
-    	return view('admin.education.store', compact('cv'));
+    public function create()
+    {
+    	$cvs = Cv::all('id', 'name');
+    	$universities = University::all('id', 'name');
+    	return view('admin.education.create', compact('cvs', 'universities'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
     	Education::create([
     		'name' => $request->name,
     		'slug' =>str_slug($request->name),
@@ -30,12 +33,13 @@ class EducationController extends Controller
             'developer' => $request->developer,
             'description' => $request->description,
             'university_id' => $request->university_id,
-    		'cv_id' => $request->cv_id
-    		]);
+            'cv_id' => $request->cv_id
+            ]);
     	return redirect()->back()->with('success', __('messages.insert'));
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
     	Education::findOrFail($id)->delete();
     	return redirect()->back()->with('success', __('messages.delete'));
     }

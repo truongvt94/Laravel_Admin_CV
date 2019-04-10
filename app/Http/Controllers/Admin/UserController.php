@@ -17,21 +17,20 @@ use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index() 
     {
-    	$show = User::paginate(User::PAGINATE);
-    	return view('admin.user.list', compact('show'));
+    	$users = User::paginate(User::PAGINATE);
+    	return view('admin.user.index', compact('users'));
     }
 
-    public function create()
+    public function create() 
     {
         $roles = User::all('type');
-        return view('admin.user.add', compact('roles'));
+        return view('admin.user.create', compact('roles'));
     }
 
-    public function store(Request $request)
-    { 
-        if($request->type != User::SUPER_ADMIN){
+    public function store(Request $request) { 
+        if($request->type != User::SUPER_ADMIN) {
             $img = '';
             if ($request->hasFile('avatar')) {
                 $fileExtension = '.'.$request->avatar->extension(); 
@@ -53,28 +52,29 @@ class UserController extends Controller
                 ]);
             return redirect()->back()->with('success', __('messages.insert'));
         }
-        
-            return redirect()->back()->with('error', __('messages.super_error'));
-        
+        return redirect()->back()->with('error', __('messages.super_error'));
     }
 
-    public function edit($id)
+    public function edit($id) 
     {
         $user = User::findOrFail($id); 
-        if((Auth::user()->id != User::SUPER_ADMIN) && ($id == User::SUPER_ADMIN || ($user["type"] == User::ADMIN && (Auth::user()->id != $id)) || ($user["type"] == User::ADMIN && (Auth::user()->id != $id)))){
+        if((Auth::user()->id != User::SUPER_ADMIN) && ($id == User::SUPER_ADMIN || ($user["type"] == User::ADMIN && (Auth::user()->id != $id)) || ($user["type"] == User::ADMIN && (Auth::user()->id != $id)))) {
             return redirect()->back()->with('error', __('messages.authorization'));
         }
         return view('admin.user.edit', compact('user'));
     }
 
-    public function update(EditUserRequest $request, $id)
+    public function update(EditUserRequest $request, $id) 
     {
-        User::findOrFail($id)
-        ->update($request->all());
-        return redirect()->back()->with('success', __('messages.edit'));        
+        if($request->type != User::SUPER_ADMIN) {
+            User::findOrFail($id)
+            ->update($request->all());
+            return redirect()->back()->with('success', __('messages.edit')); 
+        }
+        return redirect()->back()->with('error', __('messages.super_error'));
     }
 
-    public function destroy($id)
+    public function destroy($id) 
     {
         $user = User::findOrFail($id);
         if((Auth::user()->id != User::SUPER_ADMIN) && ($id == User::SUPER_ADMIN) || ($user["type"] == User::SUPER_ADMIN)) {
@@ -84,7 +84,7 @@ class UserController extends Controller
         return redirect()->back()->with('success', __('messages.delete'));
     }
 
-    public function search(Request $request)
+    public function search(Request $request) 
     {
         $keyword = $request->input('keyword');
         $user = User::where('name', 'like', "%$keyword%")

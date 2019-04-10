@@ -26,7 +26,6 @@ class UsersTableSeeder extends Seeder
             ],
             ]);
     }
-
     public function down()
     {
     	Schema::dropIfExists('users');

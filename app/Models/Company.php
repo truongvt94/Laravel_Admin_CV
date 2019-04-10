@@ -10,7 +10,7 @@ class Company extends Model
 	'name', 'slug', 'is_featured'
 	];
 
-    public function workExperince(){
+    public function workExperinces(){
     	return $this->hasMany('App\Models\WorkExperince', 'company_id', 'id');
     }
 }

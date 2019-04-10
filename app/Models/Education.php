@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Education extends Model
 {
+
+	const PAGINATE = 5;
 	protected $fillable =[
 	'university_id', 'cv_id', 'year_start', 'year_end', 'developer', 'description'
 	];
@@ -14,7 +16,7 @@ class Education extends Model
     	return $this->belongsTo('App\Models\University', 'university_id', 'id');
     }
 
-    public function cvs(){
+    public function cv(){
     	return $this->belongsTo('App\Models\Cv', 'cv_id', 'id');
     }
 

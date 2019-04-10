@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cv;
+use App\Models\Reference;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,28 +27,40 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $show = CV::where('user_id', Auth::user()->id)->get();
-        return view('admin.home.main', compact('show'));
+        $cvs = Cv::where('user_id', Auth::user()->id)->get();
+        return view('admin.home.main', compact('cvs'));
     }
 
-    public function create(){
+    public function create()
+    {
         return view('cv.index');
     }
 
-    public function store(){
+    public function store()
+    {
         return redirect()->route('home.index');
     }
 
-    public function edit($id){
-        return view('cv.create');
+    public function edit($id)
+    {
+        $cvs = Cv::findOrFail($id);
+        return view('cv.create', compact('cvs', 'references'));
     }
 
-    public function destroy($id){
+    public function update($id)
+    {
+        $cvs = Cv::findOrFail($id);
+        return view('cv.create', compact('cvs'));
+    }
+
+    public function destroy($id)
+    {
         Cv::findOrFail($id)->delete();
         return redirect()->back()->with('success', __('messages.delete'));
     }
 
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         $keyword = $request->input('keyword');
         $cv = Cv::where('name', 'like', "%$keyword%")
         ->orWhere('email', 'like', "%$keyword%")->paginate(Cv::PAGINATE);

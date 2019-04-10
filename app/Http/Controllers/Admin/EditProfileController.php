@@ -10,16 +10,18 @@ use Illuminate\Support\Facades\Auth;
 
 class EditProfileController extends Controller
 {
-	public function edit($id){
+	public function edit($id) 
+	{
 		$user = User::findOrFail($id);
-		if($user->id == Auth::user()->id){
+		if($user->id == Auth::user()->id) {
 			return view('admin.profile.index', compact('user'));
 		}
 		return redirect()->back();
 	}
 
-	public function update(EditProfileRequest $request, $id){
+	public function update(EditProfileRequest $request, $id) 
+	{
 		$user = User::findOrFail($id)->update($request->all());
-        return redirect()->back()->with('success', __('messages.edit'));
+		return redirect()->back()->with('success', __('messages.edit'));
 	}
 }

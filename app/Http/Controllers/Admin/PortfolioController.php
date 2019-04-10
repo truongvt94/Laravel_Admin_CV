@@ -9,17 +9,20 @@ use App\Http\Controllers\Controller;
 
 class PortfolioController extends Controller
 {
-    public function index(){
-    	$show = Portfolio::paginate(5);
-    	return view('admin.portfolio.index', compact('show'));
+    public function index() 
+    {
+    	$portfolios = Portfolio::paginate(Portfolio::PAGINATE);
+    	return view('admin.portfolio.index', compact('portfolios'));
     }
 
-    public function create(){
-    	$cv = Cv::all('id', 'name');
-    	return view('admin.portfolio.store', compact('cv'));
+    public function create() 
+    {
+    	$cvs = Cv::all('id', 'name');
+    	return view('admin.portfolio.create', compact('cvs'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request) 
+    {
     	Portfolio::create([
     		'name' => $request->name,
     		'slug' =>str_slug($request->name),
@@ -31,7 +34,8 @@ class PortfolioController extends Controller
     	return redirect()->back()->with('success', __('messages.insert'));
     }
 
-    public function destroy($id){
+    public function destroy($id) 
+    {
         Portfolio::findOrFail($id)->delete();
         return redirect()->back()->with('success', __('messages.delete'));
     }

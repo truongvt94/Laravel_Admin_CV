@@ -11,7 +11,7 @@ class Reference extends Model
     	'avatar', 'content', 'cv_id'
     ];
     
-    public function cvs(){
+    public function cv(){
     	return $this->belongsTo('App\Models\Cv', 'cv_id', 'id');
     }
 }

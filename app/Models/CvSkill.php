@@ -12,7 +12,7 @@ class CvSkill extends Model
 
     protected $table = "cv_skill";
 
-    public function cvs(){
+    public function cv(){
     	return $this->belongsTo('App\Models\Cv', 'cv_id', 'id');
     }
 

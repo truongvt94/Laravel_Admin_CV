@@ -69,11 +69,11 @@
 							<tbody>
 								<tr>
 									<td>Phone:</td>
-									<td contenteditable="true" name="phone">0123456789</td>
+									<td contenteditable="true" name="phone">phone</td>
 								</tr>
 								<tr>
 									<td>Email:</td>
-									<td contenteditable="true" name="email">bumblebee@gmail.com</td>
+									<td contenteditable="true" name="email">Email</td>
 								</tr>
 								<tr>
 									<td>Facebook:</td>

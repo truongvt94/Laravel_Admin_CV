@@ -21,7 +21,7 @@ class Cv extends Model
     	return $this->hasMany('App\Models\Reference', 'cv_id', 'id');
     }
 
-    public function portfolio(){
+    public function portfolios(){
     	return $this->hasMany('App\Models\Portfolio', 'cv_id', 'id');
     }
 
@@ -29,11 +29,11 @@ class Cv extends Model
     	return $this->hasMany('App\Models\CvSkill', 'cv_id', 'id');
     }
 
-    public function education(){
+    public function educations(){
     	return $this->hasMany('App\Models\Education', 'cv_id', 'id');
     }
 
-    public function workExperince(){
+    public function workExperinces(){
         return $this->hasMany('App\Models\WorkExperince', 'cv_id', 'id');
     }
 

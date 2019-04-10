@@ -10,7 +10,7 @@ class University extends Model
 	'name', 'slug', 'is_feature'
 	];
 
-    public function education(){
+    public function educations(){
     	return $this->hasMany('App\Models\Education', 'university_id', 'id');
     }
 }

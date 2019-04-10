@@ -49,13 +49,7 @@
             </a>
           </li>   
           @endcan
-
-          <li class="nav-item ">
-            <a class="nav-link" href="{{ route('cv.index') }}">
-              <i class="material-icons">content_paste</i>
-              <p>List CV</p>
-            </a>
-          </li>
+          
         </ul>
       </div>
     </div>

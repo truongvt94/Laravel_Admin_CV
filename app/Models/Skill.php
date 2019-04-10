@@ -10,7 +10,7 @@ class Skill extends Model
     'name', 'slug', 'type'
     ];
 
-    public function cvSkill(){
+    public function cvSkills(){
     	$this->hasMany('App\Models\Cv', 'skill_id', 'id');
     }
 }

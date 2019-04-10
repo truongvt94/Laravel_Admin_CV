@@ -30,9 +30,7 @@ class AuthServiceProvider extends ServiceProvider
         //super, admin, hr, member
 
         Gate::define('show-list', function($user){
-            $arr = ['1', '2', '3', '4'];
-
-            return $user->type == $arr[0] || $user->type == $arr[1];
+            return $user->type == User::SUPER_ADMIN || $user->type == User::ADMIN;
         });
 
         Gate::define('update-profile', function($user){

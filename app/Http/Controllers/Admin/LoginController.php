@@ -14,7 +14,7 @@ use App\Http\Controllers\Admin\LoginController;
 
 class LoginController extends Controller
 {
-	public function login()
+	public function login() 
 	{
 		if(!Auth::check())
 		{
@@ -26,7 +26,7 @@ class LoginController extends Controller
 		}
 	}
 
-	public function postLogin(Request $request)
+	public function postLogin(Request $request) 
 	{
 		$data = [
 		'email' => $request->email,
@@ -40,18 +40,18 @@ class LoginController extends Controller
 		}
 	}
 
-	public function logout()
+	public function logout() 
 	{
 		Auth::logout();
 		return redirect()->route('login');
 	}
 
-	public function register()
+	public function register() 
 	{
 		return view('admin.account.register');
 	}
 
-	public function postRegister(RegisterRequest $request)
+	public function postRegister(RegisterRequest $request) 
 	{
 		User::create([
 			'name' => $request->name,

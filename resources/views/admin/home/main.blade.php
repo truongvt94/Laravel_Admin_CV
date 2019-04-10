@@ -27,7 +27,7 @@
 	</div>
 @endif
 <div class="container-fluid">
-	@foreach($show as $key)
+	@foreach($cvs as $key)
 	<div class="row cv">
 		<div class="col-md-12">
 			<div class="row">
@@ -56,7 +56,7 @@
 							<button type="submit"><i class="fa fa-eye"></i>  View  </button>
 						</div>
 						<div class="col-md-3 text-center">
-							<a href="{!! route('home.create', $key->id) !!}"><button type="submit"><i class="fa fa-pencil"></i>  Edit  </button></a>
+							<a href="{!! route('home.edit', $key->id) !!}"><button type="submit"><i class="fa fa-pencil"></i>  Edit  </button></a>
 						</div>
 						<form action="{!! route('home.destroy', $key->id) !!}" method="post">
 							@csrf
