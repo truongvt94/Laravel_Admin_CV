@@ -1,49 +1,34 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<base href="{{asset(' ')}}"/> 
-	<title>CV-HaPo-Bootstrap</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<link rel="stylesheet" href="public/css/owl.carousel.min.css">
-	
-	<!-- jQuery library -->
-	<!-- Popper JS -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-	<!-- Latest compiled JavaScript -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-	<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,900" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="public/css/hapocv.css">
-	<link rel="stylesheet" type="text/css" href="public/css/Styles-mobile.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script type="text/javascript" src="public/js/owl.carousel.min.js"></script>
-</head>
-<body>
+@extends('home')
+@section('content')
+<style type="text/css">
+
+</style>
+<form id="cv-validate" method="POST" action="{{ route('home.store') }}" enctype="multipart/form-data" class="cv-body mx-auto">
+	@csrf
 	<div class="container-fluid">
 		<div class="title text-center d-block">
-			<h5 style="color: red; font-size: 25px" contenteditable="true">Title</h5>
+			<input class="input-yi title-cv" type="text" name="title_cv" value="title no cv">
 		</div>
 		<div class="btn-save text-right">
-			<a class="btn btn-success" href="{{ route('home.store') }}">Save CV</a>
+			<button type="submit" class="btn btn-success" class="btn-save-cvs">Save CV</button>
 		</div>
 	</div>
-	<div class="header-top container-fluid">
 
+	<div class="header-top container-fluid">
 		<div class="container">
 			<div class="header-bg position-relative row">
+				<img id="" src="" alt="">
 				<ul class="d-md-none menu-mobile">
 					<li><a href="#">English</a></li>
 					<li><a href="#">Japanese</a></li>
 				</ul>
 				<div class="header-left position-relative overflow-hidden col-12 col-sm-12 col-md-6 d-flex align-items-center justify-content-center justify-content-md-start align-items-md-end pb-0 pb-md-5">
-					
 					<div class="header-left-text">
-						<h2 id="name-one" class="mb-0 pl-0" contenteditable="true" name="name">{{ $cvs->name }}</h2>
-						<span contenteditable="true" name="developer">{{ $cvs->developer }}</span>
+					<input type="text" id="nameOne" class="input-bg mb-0 pl-0" name="name" value="BUMBLEBEE WALKER">
+					<input type="text" class="input-span mb-0 pl-0" name="developer" value="Ruby on Rail Developer">
 					</div>
-
 					<label class="icon-camera">
-						<input type="file" name="file" class="d-none" />
+						<input type="file" onchange="readURLBg(this);" name="file" class="d-none" />
 						<i class="camera-i fas fa-camera"></i>
 					</label>
 				</div>
@@ -55,17 +40,16 @@
 						</ul>
 
 						<div class="avatar-mini">
-							<img class="mx-auto" src="public/images/Rectangle.png" alt="">
-							<a class="mx-auto icon-avatar position-absolute" class="avatar-camera-right" href="#" title="avarta">
-								<i class="camera-i fas fa-camera"></i>
-							</a>
+							<img id="blah" class="mx-auto" src="public/images/Rectangle.png" alt="">
+							<label class="mx-auto icon-avatar position-absolute" class="avatar-camera-right" title="avarta">
+								<input class="d-none" onchange="readURL(this);" type="file" name="avatar-mini" value="">
+								<i class="camera-i fas fa-camera pt-2"></i>
+							</label>
 						</div>
 					</div>
 					<div class="title">
-
-						<p id="name-two" class="bumble p-0 m-0 font-weight-bold" contenteditable="true" name="name">{{ $cvs->name }}</p>
-
-						<p class="date-time p-0" contenteditable="true" name="date">{{ $cvs->date }}</p>
+					<input id="nameTwo" type="text" class="input-yi bumble p-0 m-0 font-weight-bold" name="name" value="BUMBLEBEE WALKER">
+					<input id="datepicker-11" class="input-yi date-time p-0" type="text" name="date" value="" placeholder="yy - mm - dd">
 						<p class="line"></p>
 					</div>
 					<div class="infor-table">
@@ -73,27 +57,27 @@
 							<tbody>
 								<tr>
 									<td>Phone:</td>
-									<td contenteditable="true" name="phone">{{ $cvs->phone }}</td>
+									<td><input class="input-yi-table" type="text" name="phone" value="0869113246"></td>
 								</tr>
 								<tr>
 									<td>Email:</td>
-									<td contenteditable="true" name="email">{{ $cvs->email }}</td>
+									<td><input class="input-yi-table" type="email" name="email" value="anhtruongtk11@gmail.com"></td>
 								</tr>
 								<tr>
 									<td>Facebook:</td>
-									<td contenteditable="true" name="facebook">{{ $cvs->facebook }}</td>
+									<td><input class="input-yi-table" type="text" name="facebook" value="bumblebee"></td>
 								</tr>
 								<tr>
 									<td>Skype:</td>
-									<td contenteditable="true" name="skype">{{ $cvs->skype }}</td>
+									<td><input class="input-yi-table" type="text" name="skype" value="bumblebee"></td>
 								</tr>
 								<tr>
 									<td>Chatwork:</td>
-									<td contenteditable="true" name="chartwork">{{ $cvs->chartwork }}</td>
+									<td><input class="input-yi-table" type="text" name="chartwork" value="bumblebee"></td>
 								</tr>
 								<tr>
 									<td>Address:</td>
-									<td contenteditable="true" name="address">{{ $cvs->address }}</td>
+									<td><input class="input-yi-table" type="text" name="address" value="Mai Dich - Cau Giay - Ha Noi"></td>
 								</tr>
 							</tbody>
 						</table>
@@ -112,9 +96,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<h1 class="sumary">PROFESSIONAL SUMMARY</h1>
-					<p contenteditable="true" name="sumary">
-						{{ $cvs->sumary }}
-					</p>
+					<textarea class="input-yi-table text-justin" rows="4" cols="100" name="sumary" >Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</textarea>
 					<div class="btn-sumary text-right">
 						<button class="btn-edi-sumary" type="submit">Edit Summary 
 							<i class="fas fa-pen"></i>
@@ -132,121 +114,46 @@
 			<div class="row">
 				<div class="skills-left col-12 col-sm-12 col-md-6">
 					<h1 class="skill-hidari">PROFESSIONAL SKILLS</h1>
-					<p contenteditable="true">
-						{{ $cvs->professional_skill_des }}
-					</p>
-
+					<textarea class="input-yi-table text-justin" rows="4" cols="100" width="10%" name="professional_skill_des" >Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod </textarea>
+					<div class="skill-item col-6 col-sm-4 col-md-6 col-lg-4">
+						<div class="chart-mazu" style="" data-percentage="50">
+							<div class="btn-skill-left">
+							<button id="btn-delete-skill-left" type="button">
+									<i onclick="myskillleft(this)" class="far fa-trash-alt d-flex justify-content-end">
+									</i>
+							</button>
+							</div>
+							<svg class="circle-chart" viewBox="0 0 33.83098862 33.83098862">
+								<circle class="circle-chart__background" cx="16.9" cy="16.9" r="15.9"></circle>
+								<circle class="circle-chart__circle success-stroke" stroke-dasharray="50,100" cx="16.9" cy="16.9" r="15.9"></circle>
+								<g class="circle-chart__info">
+									<text class="circle-chart__percent" x="17.9" y="15.5">
+									</text>
+								</g>
+								<span class="span-white-per-number"><input type="text" name="percent" value="50%"></span>
+								<br>
+							</svg>
+							<span class="span-white-per-text p-0 m-0" contenteditable="true">HTML/ CSS</span>
+						</div>  
+					</div>
 					<div class="row chart-icon">
-						<div class="chart-mazu col-6 col-sm-4 col-md-6 col-lg-4" style="" data-percentage="50">
-							<div class="btn-skill-left"> 
-								<button id="btn-delete-skill-left">
-									<i onclick='myskillleft(this)' class="far fa-trash-alt d-flex justify-content-end">
-									</i>
-								</button>
-							</div>
-							<svg class="circle-chart" viewBox="0 0 33.83098862 33.83098862">
-								<circle class="circle-chart__background" cx="16.9" cy="16.9" r="15.9"></circle>
-								<circle class="circle-chart__circle success-stroke" stroke-dasharray="75,100" cx="16.9" cy="16.9" r="15.9">
-								</circle>
-								<g class="circle-chart__info">
-									<text class="circle-chart__percent" x="17.9" y="15.5"></text>
-								</g>
-								<span class="span-white-per-number" contenteditable="true">75%</span><br>
-							</svg>
-							<span class="span-white-per-text p-0 m-0" contenteditable="true">HTML/CSS</span>
-						</div>
-
-						<div class="chart-mazu col-6 col-sm-4 col-md-6 col-lg-4" style="" data-percentage="50">
-							<div class="btn-skill-left"> 
-								<button id="btn-delete-skill-left">
-									<i onclick='myskillleft(this)' class="far fa-trash-alt d-flex justify-content-end">
-									</i>
-								</button>
-							</div>
-							<svg class="circle-chart" viewBox="0 0 33.83098862 33.83098862">
-								<circle class="circle-chart__background" cx="16.9" cy="16.9" r="15.9"></circle>
-								<circle class="circle-chart__circle success-stroke" stroke-dasharray="75,100" cx="16.9" cy="16.9" r="15.9">
-								</circle>
-								<g class="circle-chart__info">
-									<text class="circle-chart__percent" x="17.9" y="15.5"></text>
-								</g>
-								<span class="span-white-per-number" contenteditable="true">75%</span><br>
-							</svg>
-							<span class="span-white-per-text p-0 m-0" contenteditable="true">HTML/CSS</span>
-						</div>
-						<div class="chart-mazu col-6 col-sm-4 col-md-6 col-lg-4" style="" data-percentage="50">
-							<div class="btn-skill-left"> 
-								<button id="btn-delete-skill-left">
-									<i onclick='myskillleft(this)' class="far fa-trash-alt d-flex justify-content-end">
-									</i>
-								</button>
-							</div>
-							<svg class="circle-chart" viewBox="0 0 33.83098862 33.83098862">
-								<circle class="circle-chart__background" cx="16.9" cy="16.9" r="15.9"></circle>
-								<circle class="circle-chart__circle success-stroke" stroke-dasharray="75,100" cx="16.9" cy="16.9" r="15.9">
-								</circle>
-								<g class="circle-chart__info">
-									<text class="circle-chart__percent" x="17.9" y="15.5"></text>
-								</g>
-								<span class="span-white-per-number" contenteditable="true">75%</span><br>
-							</svg>
-							<span class="span-white-per-text p-0 m-0" contenteditable="true">HTML/CSS</span>
-						</div>
-						<div class="chart-mazu col-6 col-sm-4 col-md-6 col-lg-4" style="" data-percentage="50">
-							<div class="btn-skill-left"> 
-								<button id="btn-delete-skill-left">
-									<i onclick='myskillleft(this)' class="far fa-trash-alt d-flex justify-content-end">
-									</i>
-								</button>
-							</div>
-							<svg class="circle-chart" viewBox="0 0 33.83098862 33.83098862">
-								<circle class="circle-chart__background" cx="16.9" cy="16.9" r="15.9"></circle>
-								<circle class="circle-chart__circle success-stroke" stroke-dasharray="75,100" cx="16.9" cy="16.9" r="15.9">
-								</circle>
-								<g class="circle-chart__info">
-									<text class="circle-chart__percent" x="17.9" y="15.5"></text>
-								</g>
-								<span class="span-white-per-number" contenteditable="true">75%</span><br>
-							</svg>
-							<span class="span-white-per-text p-0 m-0" contenteditable="true">HTML/CSS</span>
-						</div>
-
-						<div class="chart-mazu col-6 col-sm-4 col-md-6 col-lg-4" style="" data-percentage="50">
-							<div class="btn-skill-left"> 
-								<button id="btn-delete-skill-left">
-									<i onclick='myskillleft(this)' class="far fa-trash-alt d-flex justify-content-end">
-									</i>
-								</button>
-							</div>
-							<svg class="circle-chart" viewBox="0 0 33.83098862 33.83098862">
-								<circle class="circle-chart__background" cx="16.9" cy="16.9" r="15.9"></circle>
-								<circle class="circle-chart__circle success-stroke" stroke-dasharray="75,100" cx="16.9" cy="16.9" r="15.9">
-								</circle>
-								<g class="circle-chart__info">
-									<text class="circle-chart__percent" x="17.9" y="15.5"></text>
-								</g>
-								<span class="span-white-per-number" contenteditable="true">75%</span><br>
-							</svg>
-							<span class="span-white-per-text p-0 m-0" contenteditable="true">HTML/CSS</span>
-						</div>
-
 						<div class="col-6 col-sm-4 col-md-6 col-lg-4 btn-chart" style="">
-							<button class="btn-add-chart">Add Skills <i class="fas fa-plus"></i></button>
+							<button class="btn-add-chart" type="button">Add Skills <i class="fas fa-plus"></i></button>
 						</div>
 					</div>
-
 				</div>
 				<div class="skills-right col-12 col-sm-12 col-md-6">
 					<h1 class="skill-migi pt-5 pt-md-0 pt-lg-0">PERSONAL SKILLS</h1>
-					<p contenteditable="true">{{ $cvs->personal_skill_des }}
-					</p>
+					<textarea class="input-yi-table text-justin" rows="4" cols="100" width="10%" name="personal_skill_des" >Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod </textarea>
+
 					<div class="team-chart ml-0 mr-md-4 ml-md-4 row">
 						<div class="btn-sumary col-md-12 text-right mt-4 pr-0">
-							<button class="btn-edit-sumary" type="submit">Add Skills 
+							<button class="btn-edit-sumary" type="button">Add Skills 
 								<i class="fas fa-plus"></i>
 							</button>
 						</div> 
 					</div>
+
 					<div class="clearfix">
 					</div>
 				</div>
@@ -260,22 +167,23 @@
 		<div class="left row">
 			<div class="col-md-6 full-item">
 				<h1 class="white-line">WORK EXPERIENCE</h1>
-				<p contenteditable="true">{{ $cvs->work_experience_des }}</p>
+				<textarea class="input-yi-table text-justin" rows="4" cols="100" width="10%" name="work_experience_des" >Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod </textarea>
 				<div class="box">
+					
 				</div>
 				<div class="btn-experince text-md-right text-center">
-					<button class="btn-add-experince" type="submit">
+					<button class="btn-add-experince" type="button">
 						Add work experience <i class="fas fa-plus"></i>
 					</button>
 				</div>
 			</div>
 			<div class="col-md-6 educati">
 				<h1 class="white-line">WORK EDUCATION</h1>
-				<p contenteditable="true">{{ $cvs->education_des }}</p>
+				<textarea class="input-yi-table text-justin" rows="4" cols="100" width="10%" name="education_des" >Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod </textarea>
 				<div class="box-edu">
 				</div>
 				<div class="btn-experince-two text-md-right text-center">
-					<button class="btn-add-experince-right mt-0" type="submit">
+					<button class="btn-add-experince-right mt-0" type="button">
 						Add Education <i class="fas fa-plus"></i>
 					</button>
 				</div>
@@ -299,7 +207,7 @@
 
 		<div class="d-none d-flex w-100 flex-wrap portfolio-pc">
 			<div class="w-25 project-one position-relative">
-
+				
 			</div>
 			<div class="w-25 project-two">
 
@@ -311,7 +219,88 @@
 
 			<div class="w-25">
 				<div class="project-for">
+				</div>
+				<div class="btn-project project-ni w-100 cv-center">
+					<button class="btn-add-project" class="cv-btn align-middle" type="button">Add Project
+						<i class="fas fa-plus"></i>
+					</button>
+				</div>
+			</div>
+		</div>   
+		<!-- Modal HTML Markup -->
+		<div style="color: black" id="ModalLoginForm" class="modal fade">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h2 class="modal-title">infor portfolio</h2>
+					</div>
+					<div class="modal-body">
+						<form role="form" method="POST" action="">
+							@csrf
+							<div class="form-group">
+								<label class="control-label">Name: </label>
+								<div>
+									<input type="text" class="form-control input-lg" placeholder="Enter name..." name="name" value="">
+								</div>
+							</div>
 
+							<div class="form-group">
+								<label class="control-label">Date start: </label>
+								<div>
+									<input type="text" id="datepicker-11" name="start_date" placeholder="Year/ Month/ Day"><br>
+								</div>
+								<br>
+
+								<div class="form-group">
+									<label class="control-label">Date end: </label>
+									<div>
+										<input type="text" id="datepicker-12" name="end_date" placeholder="Year/ Month/ Day"><br>
+									</div>
+								</div>
+								<div class="form-group text-center">
+									<div>
+										<button type="button" class="btn btn-success" id="btn-save-infor">
+											Save
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+			<div class="d-lg-none d-md-none d-md-block d-flex w-100 flex-wrap portfolio-mb">
+				<div class="w-50" id="proLeft">
+					<div style="height:109px;background-color:#FD7038" class="cv-center">
+						<img src="images/project.jpg" style="width: 88px;">
+					</div>
+					<div style="height:109px;background-color:#2F2FA1" class="cv-center">
+						<img src="images/project.jpg" style="width: 88px;">
+					</div>
+					<div style="height:109px;background-color:#F64C71" class="cv-center">
+						<img src="images/project.jpg" style="width: 88px;">
+					</div>
+					<div style="height:218px;background-color:#EF5B5B" class="cv-center">
+						<img src="images/project-black.jpg" style="width: 119px;">
+					</div>
+					<div style="height:109px;background-color:#333333" class="cv-center">
+						<img src="images/project.jpg" style="width: 88px;">
+					</div>
+				</div>
+
+				<div class="w-50">
+					<div id="proRight">
+						<div style="height:218px;background-color:#EECD10" class="cv-center">
+							<img src="images/project-black.jpg" style="width: 119px;">
+						</div>
+						<div style="height:109px;background-color:#333333" class="cv-center">
+							<img src="images/project.jpg" style="width: 88px;">
+						</div><div style="height:109px;background-color:#F9BC2D" class="cv-center">
+						<img src="images/project.jpg" style="width: 88px;">
+					</div>
+					<div style="height:109px;background-color:#F64C71" class="cv-center">
+						<img src="images/project.jpg" style="width: 88px;">
+					</div>
 				</div>
 				<div class="btn-project project-ni w-100 cv-center">
 					<button class="btn-add-project" class="cv-btn align-middle">Add Project
@@ -319,72 +308,15 @@
 					</button>
 				</div>
 			</div>
-		</div>   
-
-		<div class="d-lg-none d-md-none d-md-block d-flex w-100 flex-wrap portfolio-mb">
-			<div class="w-50" id="proLeft">
-				<div style="height:109px;background-color:#FD7038" class="cv-center">
-					<img src="public/images/project.jpg" style="width: 88px;">
-				</div>
-				<div style="height:109px;background-color:#2F2FA1" class="cv-center">
-					<img src="public/images/project.jpg" style="width: 88px;">
-				</div>
-				<div style="height:109px;background-color:#F64C71" class="cv-center">
-					<img src="public/images/project.jpg" style="width: 88px;">
-				</div>
-				<div style="height:218px;background-color:#EF5B5B" class="cv-center">
-					<img src="public/images/project-black.jpg" style="width: 119px;">
-				</div>
-				<div style="height:109px;background-color:#333333" class="cv-center">
-					<img src="public/images/project.jpg" style="width: 88px;">
-				</div>
-			</div>
-
-			<div class="w-50">
-				<div id="proRight">
-					<div style="height:218px;background-color:#EECD10" class="cv-center">
-						<img src="public/images/project-black.jpg" style="width: 119px;">
-					</div>
-					<div style="height:109px;background-color:#333333" class="cv-center">
-						<img src="public/images/project.jpg" style="width: 88px;">
-					</div><div style="height:109px;background-color:#F9BC2D" class="cv-center">
-					<img src="public/images/project.jpg" style="width: 88px;">
-				</div>
-				<div style="height:109px;background-color:#F64C71" class="cv-center">
-					<img src="public/images/project.jpg" style="width: 88px;">
-				</div>
-			</div>
-			<div class="btn-project project-ni w-100 cv-center">
-				<button class="btn-add-project" class="cv-btn align-middle">Add Project
-					<i class="fas fa-plus"></i>
-				</button>
-			</div>
 		</div>
 	</div>
 </div>
 </div>
 </div>
-</div>
-<!-- -->
 <div class="container-fluid references">
 	<div class="container">
 		<h1 class="refer mb-5">REFERENCES RENCES</h1>
 		<div id="truong" class="owl-carousel owl-theme">
-			
-			<div class="slide item row">
-				<div class="slide-img col-md-3 d-flex justify-content-center">
-					<img class="" src="public/images/avatar-ref.jpg" alt="">
-				</div>
-				<div class="slide-text col-md-9 position-relative ">
-					<p contenteditable="true"><span class="slide-sapn slide-sapn-one position-absolute">“</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<span class="slide-sapn slide-sapn-two position-absolute">”</span>
-					</p>
-				</div>
-			</div>
 			
 		</div>
 		<div class="btn-refer"> 
@@ -394,7 +326,7 @@
 			</button>
 		</div>
 		<div class="col-md-12 btn-references text-center" style="">
-			<button class="btn-add-references">Add References 
+			<button class="btn-add-references" type="button">Add References
 				<i class="fas fa-plus"></i>
 			</button>
 		</div>
@@ -403,33 +335,8 @@
 <div class="container-fluid footer">
 	<p>2019 Flatos.com All right reserved</p>
 </div>
-
-<script type="text/javascript" >
-	$('#truong').owlCarousel({
-		autoplayTimeout: 5000,
-		items: 1,
-		nav: true,
-		dots: true,
-		loop: true,
-		margin: 10,
-		responsive: {
-			1200: {
-				items: 1,
-			}
-		}
-	});
-
-	$('#name-one').blur(function() {
-		let name_value = $(this).text();
-		$('#name-two').html(name_value);
-	});
-
-	$('#name-two').blur(function() {
-		let name_value = $(this).text();
-		$('#name-one').html(name_value);
-	});
+</form>
+<script type="text/javascript">
+	
 </script>
-<script src="public/js/scrips.js" type="text/javascript"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-</body>
-</html>
+@endsection

@@ -27,29 +27,52 @@
 <body>
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="public/assets/img/sidebar-1.jpg">
+    
       <div class="logo">
-        <a href="#" class="simple-text logo-normal">
+        <a href="{{ route('home.index') }}" class="simple-text logo-normal">
           CV - HAPOSOFT
         </a>
       </div>
+
       <div class="sidebar-wrapper">
         <ul class="nav">
+
+        @can('hr-cv')
+          <li class="nav-item active  ">
+            <a class="nav-link" href="{{ route('list-cv.index') }}">
+              <i class="material-icons">dashboard</i>
+              <p>Dashboard</p>
+            </a>
+          </li> 
+        @endcan
+
+        @can('list-member')
           <li class="nav-item active  ">
             <a class="nav-link" href="{{ route('home.index') }}">
               <i class="material-icons">dashboard</i>
               <p>Dashboard</p>
             </a>
-          </li>
+          </li> 
+        @endcan
 
-          @can('show-list')
-          <li class="nav-item ">
-            <a class="nav-link" href="{!! route('user.index') !!}">
-              <i class="material-icons">person</i>
-              <p>User Profile</p>
-            </a>
-          </li>   
-          @endcan
-          
+        @can('show-list')
+        <li class="nav-item active  ">
+          <a class="nav-link" href="{{ route('list-cv.index') }}">
+            <i class="material-icons">dashboard</i>
+            <p>Dashboard</p>
+          </a>
+        </li> 
+        @endcan
+
+        @can('show-list')
+        <li class="nav-item ">
+          <a class="nav-link" href="{!! route('user.index') !!}">
+            <i class="material-icons">person</i>
+            <p>User Profile</p>
+          </a>
+        </li>   
+        @endcan
+        
         </ul>
       </div>
     </div>
@@ -129,9 +152,10 @@
     <script src="public/assets/js/plugins/bootstrap-selectpicker.js"></script>
     <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
     <script src="public/assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
     <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
     <script src="public/assets/js/plugins/jasny-bootstrap.min.js"></script>
@@ -152,14 +176,6 @@
     <script src="public/assets/js/material-dashboard.js?v=2.1.1" type="text/javascript"></script>
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
     <script src="public/assets/demo/demo.js"></script>
-    <script type="text/javascript">
-      $( function() {
-        $( "#datepicker" ).datepicker({
-          dateFormat: "yy-mm-dd",
-          changeYear: true
-        });
-      });
-    </script>
     <script>
       $(document).ready(function() {
 
@@ -183,7 +199,6 @@
             }
 
           }
-
           $('.fixed-plugin a').click(function(event) {
           // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
           if ($(this).hasClass('switch-trigger')) {
@@ -335,11 +350,10 @@
 </script>
 <script>
   $(document).ready(function() {
-      // Javascript method's body can be found in assets/js/demos.js
-      md.initDashboardPageCharts();
+    md.initDashboardPageCharts();
 
-    });
-  </script>
+  });
+</script>
 </body>
 
 </html>

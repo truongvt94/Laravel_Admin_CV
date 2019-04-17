@@ -25,3 +25,4 @@ class EditProfileController extends Controller
 		return redirect()->back()->with('success', __('messages.edit'));
 	}
 }
+
