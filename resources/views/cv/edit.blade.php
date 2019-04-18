@@ -1,22 +1,17 @@
-{{-- @extends('home')
+@extends('home')
 @section('content')
-
 <div class="container-fluid">
 	<div class="title text-center d-block">
 		<h5 style="color: red; font-size: 25px" contenteditable="true">Title</h5>
 	</div>
 	<div class="btn-save text-right">
-		@csrf
-		<a class="btn btn-success" class="btn-save-cvs" href="{{ route('home.store') }}">Save CV CR</a>
+		<a class="btn btn-success" href="{{ route('home.index') }}">Save CV</a>
 	</div>
 </div>
-
-@include('error.error')
-
 <div class="header-top container-fluid">
+
 	<div class="container">
 		<div class="header-bg position-relative row">
-		<img id="" src="" alt="">
 			<ul class="d-md-none menu-mobile">
 				<li><a href="#">English</a></li>
 				<li><a href="#">Japanese</a></li>
@@ -24,10 +19,10 @@
 			<div class="header-left position-relative overflow-hidden col-12 col-sm-12 col-md-6 d-flex align-items-center justify-content-center justify-content-md-start align-items-md-end pb-0 pb-md-5">
 				<div class="header-left-text">
 					<h2 id="name-one" class="mb-0 pl-0" contenteditable="true" name="name">BUMBLEBEE WALKER</h2>
-					<span contenteditable="true" name="developer">Developper</span>
+					<span contenteditable="true" name="developer">Ruby on Rail Developer</span>
 				</div>
 				<label class="icon-camera">
-					<input type="file" onchange="readURLBg(this);" name="file" class="d-none" />
+					<input type="file" name="file" class="d-none" />
 					<i class="camera-i fas fa-camera"></i>
 				</label>
 			</div>
@@ -39,15 +34,14 @@
 					</ul>
 
 					<div class="avatar-mini">
-						<img id="blah" class="mx-auto" src="public/images/Rectangle.png" alt="">
-						<label class="mx-auto icon-avatar position-absolute" class="avatar-camera-right" title="avarta">
-						<input class="d-none" onchange="readURL(this);" type="file" name="avatar-mini" value="">
-							<i class="camera-i fas fa-camera pt-2"></i>
-						</label>
+						<img class="mx-auto" src="images/Rectangle.png" alt="">
+						<a class="mx-auto icon-avatar position-absolute" class="avatar-camera-right" href="#" title="avarta">
+							<i class="camera-i fas fa-camera"></i>
+						</a>
 					</div>
 				</div>
 				<div class="title">
-					<p id="name-two" class="bumble p-0 m-0 font-weight-bold" contenteditable="true" name="name">BUMBLEBEE WALKER</p>
+					<p id="name-two" class="name-two bumble p-0 m-0 font-weight-bold" contenteditable="true" name="name">BUMBLEBEE WALKER</p>
 					<p class="date-time p-0" contenteditable="true" name="date">25/12/1992</p>
 					<p class="line"></p>
 				</div>
@@ -60,7 +54,7 @@
 							</tr>
 							<tr>
 								<td>Email:</td>
-								<td contenteditable="true" name="email">anhtruongtk11@gmail.com</td>
+								<td contenteditable="true" name="email">Email</td>
 							</tr>
 							<tr>
 								<td>Facebook:</td>
@@ -168,7 +162,6 @@
 				<h1 class="white-line">WORK EXPERIENCE</h1>
 				<p contenteditable="true">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt</p>
 				<div class="box">
-					
 				</div>
 				<div class="btn-experince text-md-right text-center">
 					<button class="btn-add-experince" type="submit">
@@ -206,7 +199,7 @@
 
 		<div class="d-none d-flex w-100 flex-wrap portfolio-pc">
 			<div class="w-25 project-one position-relative">
-				
+
 			</div>
 			<div class="w-25 project-two">
 
@@ -227,48 +220,7 @@
 				</div>
 			</div>
 		</div>   
-		<!-- Modal HTML Markup -->
-		<div style="color: black" id="ModalLoginForm" class="modal fade">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h2 class="modal-title">infor portfolio</h2>
-					</div>
-					<div class="modal-body">
-						<form role="form" method="POST" action="">
-							@csrf
-							<div class="form-group">
-								<label class="control-label">Name: </label>
-								<div>
-									<input type="text" class="form-control input-lg" placeholder="Enter name..." name="name" value="">
-								</div>
-							</div>
 
-							<div class="form-group">
-								<label class="control-label">Date start: </label>
-								<div>
-									<input type="text" id="datepicker-11" name="start_date" placeholder="Year/ Month/ Day"><br>
-								</div>
-								<br>
-
-								<div class="form-group">
-									<label class="control-label">Date end: </label>
-									<div>
-										<input type="text" id="datepicker-12" name="end_date" placeholder="Year/ Month/ Day"><br>
-									</div>
-								</div>
-								<div class="form-group text-center">
-									<div>
-										<button type="submit" class="btn btn-success" id="btn-save-infor">
-											Save
-										</button>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div><!-- /.modal-content -->
-				</div><!-- /.modal-dialog -->
-			</div><!-- /.modal -->
 		<div class="d-lg-none d-md-none d-md-block d-flex w-100 flex-wrap portfolio-mb">
 			<div class="w-50" id="proLeft">
 				<div style="height:109px;background-color:#FD7038" class="cv-center">
@@ -313,6 +265,7 @@
 </div>
 </div>
 </div>
+<!-- -->
 <div class="container-fluid references">
 	<div class="container">
 		<h1 class="refer mb-5">REFERENCES RENCES</h1>
@@ -335,76 +288,4 @@
 <div class="container-fluid footer">
 	<p>2019 Flatos.com All right reserved</p>
 </div>
-
-<script type="text/javascript">
-	$().ready(function() {
-		$(".btn-save-cvs").validate({
-			onfocusout: true,
-			onkeyup: true,
-			onclick: true,
-			groups: {
-				nameGroup: "firstName middleName lastName"
-			},
-			rules: {
-				"firstName": {
-					required: true,
-					maxlength: 15,
-					minlength: 5
-				},
-				"mail": {
-					required: true,
-					maxlength: 100,
-					email: true
-				},
-				"tel": {
-					required: true,
-					maxlength: 15,
-					minlength: 5,
-					digits: true
-				},
-				"name": {
-					required: true,
-					maxlength: 15
-				},
-				"message": {
-					required: true,
-					maxlength: 15
-				}
-			},
-			
-		});
-		$("#demoForm1").validate({
-			onfocusout: true,
-			onkeyup: true,
-			onclick: true,
-			groups: {
-				nameGroup: "firstName middleName lastName"
-			},
-			rules: {
-				"firstName": {
-					required: true,
-					maxlength: 15,
-					minlength: 5
-				},
-				"mail": {
-					required: true,
-					maxlength: 100,
-					email: true
-				},
-				"tel": {
-					required: true,
-					maxlength: 15,
-					minlength: 5,
-					digits: true
-				},
-				"name": {
-					required: true,
-					maxlength: 15
-				}
-			},
-			
-		});
-	});
-</script>
 @endsection
- --}}

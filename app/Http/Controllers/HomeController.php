@@ -3,9 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Cv;
-use App\Models\Reference;
 use App\User;
+use App\Models\Cv;
+use App\Models\Company;
+use App\Models\CvSkill;
+use App\Models\Education;
+use App\Models\Portfolio;
+use App\Models\Reference;
+use App\Models\Skill;
+use App\Models\University;
+use App\Models\WorkExperince;
+
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -25,6 +33,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    
     public function index()
     {
         $cvs = Cv::where('user_id', Auth::user()->id)->get();
@@ -33,24 +42,75 @@ class HomeController extends Controller
 
     public function create()
     {
-        return view('cv.index');
+        return view('cv.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
+        $images = '';
+        $avatar = '';
+        if($request->hasFile('images')) {
+           $fileEx = '.'.$request->images->extension();
+           $imgName = 'img'.uniqid().$fileEx;
+           $request->file('images')->move(public_path('images'), $imgName);
+           $images = $imgName;
+       }
+       if($request->hasFile('avatar')) {
+           $fileEx = '.'.$request->avatar->extension();
+           $imgName = 'img'.uniqid().$fileEx;
+           $request->file('avatar')->move(public_path('images'), $imgName);
+           $avatar = $imgName;
+       }
+       Cv::create([
+           'name' => $request->name,
+           'slug' => str_slug($request->name),
+           'phone' => $request->phone,
+           'email' => $request->email,
+           'date' => $request->date,
+           'facebook' => $request->facebook,
+           'skype' => $request->skype,
+           'chartwork' => $request->chartwork,
+           'address' => $request->address,
+           'sumary' => $request->sumary,
+           'images' => $images,
+           'avatar' => $avatar,
+           'developer' => $request->developer,
+           'professional_skill_des' => $request->professional_skill_des,
+           'personal_skill_des' => $request->personal_skill_des,
+           'education_des' => $request->education_des,
+           'work_experience_des' => $request->work_experience_des,
+           'user_id' => Auth::user()->id,
+           ]);
+       /*Reference::create([
+          'avatar' => $request->avatar,
+          'content' => $request->content,
+          'cv_id' => $cvs->id
+        ]);
+       Portfolio::create([
+          'name' => $request->name,
+          'date_start' => $request->date_start,
+          'date_end' => $request->date_end,
+          'cv_id' => $cvs->id
+        ]);*/
         return redirect()->route('home.index');
+    }
+
+    public function show($id)
+    {
+        $cvs = Cv::findOrFail($id);
+        return view('cv.show');
     }
 
     public function edit($id)
     {
         $cvs = Cv::findOrFail($id);
-        return view('cv.create', compact('cvs', 'references'));
+        return view('cv.edit', compact('cvs'));
     }
 
     public function update($id)
     {
         $cvs = Cv::findOrFail($id);
-        return view('cv.create', compact('cvs'));
+        return redirect()->route('home.create');
     }
 
     public function destroy($id)
@@ -63,7 +123,8 @@ class HomeController extends Controller
     {
         $keyword = $request->input('keyword');
         $cv = Cv::where('name', 'like', "%$keyword%")
-        ->orWhere('email', 'like', "%$keyword%")->paginate(Cv::PAGINATE);
+        ->Where('user_id', Auth::user()->id)
+        ->paginate(Cv::PAGINATE);
         $data = [
             'cv' => $cv,
             'keyword' => $keyword

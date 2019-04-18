@@ -53,5 +53,8 @@ Route::group(['middleware' => 'auth'], function() {
         Route::group(['prefix' => ''],function() {
             Route::resource('daboard','HomeController');
         });
+
+        Route::resource('list-cv', 'HrController');
+        Route::get('search', 'HrController@search')->name('search');
     });
 });

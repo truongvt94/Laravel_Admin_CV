@@ -37,8 +37,16 @@ class AuthServiceProvider extends ServiceProvider
             return $user->id != Auth::user()->id;
         });
 
+        Gate::define('list-member', function($user){
+            return $user->id == User::MEMBER;
+        });
+
         Gate::define('add-user', function($user){
             return $user->type == self::ADMIN;
+        });
+
+        Gate::define('hr-cv', function($user){
+            return $user->type == User::HR;
         });
     }
 }

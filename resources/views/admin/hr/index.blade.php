@@ -1,6 +1,6 @@
-@extends('Admin/Home')
+@extends('admin.home')
 @section('content')
-<form action="{!! route('timkiem') !!}" method="get" class="navbar-form form-search">
+<form action="{!! route('search') !!}" method="get" class="navbar-form form-search">
 	@csrf            
 	<div class="input-group no-border">
 		<input type="text" name="keyword" class="form-control" placeholder="Search...">
@@ -21,20 +21,18 @@
 		</div>
 	</div>
 </div>
-
 @if(Session::has('success'))
-<div class="alert alert-success">
-	{{ Session::get('success') }}
-</div>
+	<div class="alert alert-success">
+		{{ Session::get('success') }}
+	</div>
 @endif
-
 <div class="container-fluid">
 	@foreach($cvs as $key)
 	<div class="row cv">
 		<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-2 avatar">
-					<img src="public/images/{{ $key->avatar }}" alt="img">
+					<img src="public/images/{{ $key->avatar }}" alt="">
 				</div>
 				<div class="col-md-10">
 					<div class="row">
@@ -52,11 +50,13 @@
 					</div>
 					<div class="row">
 						<div class="col-md-3 text-center">
-							<button type="submit"><i class="fa fa-download"></i>   Download </button>
+							<button type="submit"><i class="fa fa-download"></i>  Download  </button>
 						</div>
 						<div class="col-md-3 text-center">
-							<button type="submit"><i class="fa fa-eye"></i>  View </button>
+							<button type="submit"><i class="fa fa-eye"></i>  View  </button>
 						</div>
+
+						@can('list-member')
 						<div class="col-md-3 text-center">
 							<a href="{!! route('home.edit', $key->id) !!}"><button type="submit"><i class="fa fa-pencil"></i>  Edit  </button></a>
 						</div>
@@ -67,6 +67,7 @@
 								<button type="submit" style="width: 100px"><i class="fa fa-trash"></i>  Delete  </button>
 							</div>
 						</form>
+						@endcan
 					</div>
 				</div>
 			</div>

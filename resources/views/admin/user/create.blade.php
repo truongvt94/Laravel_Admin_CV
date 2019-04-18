@@ -1,7 +1,7 @@
 @extends('Admin.Home')
 @section('content')
 <h1 class="text-center">Add User</h1><br>
-<form class="frm-add" method="post" enctype="multipart/form-data" action="{{route('user.store')}}">
+<form class="frm-add" method="post" enctype="multipart/form-data" action="{{ route('user.store') }}">
 
   @if(Session::has('success'))
   <div class="alert alert-success">
@@ -16,6 +16,7 @@
   @endif
   
   @include('error.error')
+  
   <div class="form-group">
     <input type="text" class="form-control" name="name" required="required" placeholder="Enter name...">
   </div>     

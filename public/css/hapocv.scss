@@ -11,6 +11,12 @@
 	padding-bottom: 45px;
 }
 
+@mixin nonebg {
+	background: none;
+	border: none;
+	color: #ffffff;
+}
+
 body {
 	box-sizing: border-box;
 	margin: 0 auto;
@@ -51,6 +57,22 @@ h1 {
 	padding: 0;
 }
 
+.datepicker-11 {
+	width: 100%;
+	height: 35px;
+}
+
+.datepicker-12 {
+	width: 100%;
+	height: 35px;
+}
+
+.title-cv {
+	color: red;
+	font-size: 25px; 
+	font-family: Poppins
+}
+
 .header-top {
 	overflow: hidden;
 	background: #242581 url('../images/Rectangle.png') left top no-repeat;
@@ -68,6 +90,12 @@ h1 {
 
 		p {
 			font-size: 20px;
+		}
+		label.error {
+			position: absolute;
+			left: 20px;
+			margin-top: -15px;
+			color: red;
 		}
 	}
 
@@ -136,9 +164,9 @@ h1 {
 	.icon-avatar {
 		width: 145px;
 		height: 35px;
-		line-height: 26px;
+		line-height: 30px;
 		text-align: center;
-		bottom: -5px;
+		bottom: -8px !important;
 		left: 0;
 	}
 }
@@ -161,14 +189,56 @@ h1 {
 	padding-bottom: 0;
 }
 
+label.error {
+	left: 20px;
+	color: red;
+}
+
+.title {
+	label.error {
+		left: 20px;
+		margin-top: -5px;
+		color: red;
+		display: flex;
+		justify-content: center;
+	}
+}
+
 .title p, h2 {
 	text-align: center;
+}
+
+.input-yi {
+	@include nonebg;
+	width: 100%;
+	text-align: center;
+}
+
+.input-yi-table {
+	@include nonebg;
+	width: 100%;
+}
+
+.input-bg {
+	@include nonebg;
+	font-size: 40px;
+	font-weight: 700;
+	font-family: Poppins;
+	letter-spacing: 0.05em;
+}
+
+.input-span {
+	@include nonebg;
+	font-size: 20px;
+	font-family: Poppins;
+	letter-spacing: 0.05em;
 }
 
 .infor-table {
 	margin-left: -45px;
 
 	table {
+		width: 100%;
 		margin: 0 auto;
 		font-weight: 300;
 		font-size: 14px;
@@ -179,8 +249,13 @@ h1 {
 		}
 
 		tr td:first-child {
+			padding-left: 50px;
 			padding-right: 15px;
 			font-weight: bold;
+		}
+
+		tr td input:first-child {
+			padding-left: -50px;
 		}
 
 		tr:first-child td{
@@ -235,6 +310,7 @@ h1 {
 }
 
 .btn-chart {
+	height: 150px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -303,7 +379,7 @@ h1 {
 	display: block;
 	width: 100%;
 	height: 150px;
-	line-height: 163px;
+	line-height: 100px;
 }
 
 .span-white-per-text {
@@ -574,7 +650,7 @@ span {
 		}
 
 		.slide-sapn-two {
-			top: 98px;
+			margin-top: -20px;
 		}
 	}
 
@@ -594,6 +670,10 @@ span {
 	background: none;
 	border: none;
 	color: #ffffff;
+}
+
+.owl-dot span {
+	display: none;
 }
 
 .owl-carousel {
@@ -631,13 +711,13 @@ span {
 	}
 
 	.owl-dot {
-		background-color: red;
+		background-color: #ffffff !important;
 		border-radius: 50%;
-		height: 1rem;
+		height: 0.7rem !important;
 		margin: 0 5px;
 		opacity: .5;
 		transition: opacity .3s;
-		width: 1rem;
+		width: 0.7rem !important;
 		&:hover,
 		&.active {
 			opacity: 1;
@@ -653,7 +733,7 @@ h1 {
 
 .footer {
 	background: #0C0C5E;
-	height: 50px;
+	height: 57px;
 
 	p {
 		text-align: center;
