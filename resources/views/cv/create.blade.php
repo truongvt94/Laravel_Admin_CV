@@ -1,6 +1,81 @@
 @extends('home')
 @section('content')
 <style type="text/css">
+	.circle-chart {
+		width: 100px;
+		height: 100px;
+		margin-bottom: 5px;
+		margin: 30px auto;
+		position: relative;
+		display: block;
+	}
+
+	.ui-datepicker-month {
+		margin-left: -40px;
+	}
+
+	.header-left-text {
+		position: relative;
+	}
+
+	.name-one {
+		padding: 0;
+	}
+
+	.name-one:before {
+		content: "";
+		width: 41%;
+		border-top: 2px solid #F64C71;
+		position: absolute;
+		display: block;
+	}
+
+	.infor-table table tr td:first-child {
+		padding-right: 0 !important;
+		font-weight: bold;
+		width: 30%;
+	}
+
+	.title-cv {
+		color: red !important;
+	}
+
+	.owl-dots .owl-dot span {
+		display: none !important;
+	}
+
+	.input-title {
+		background: none;
+		border: none;
+		color: #ffffff;
+		width: 64%;
+	}
+
+	.input-year {
+		background: none;
+		border: none;
+		color: #ffffff;
+		width: 8.5%;
+		text-align: center;
+	}
+
+	.team-chart-div .team-chart-span {
+		position: absolute;
+	}
+
+	.span-white-per-number {
+		background: none !important;
+		z-index: 9;
+		border: none;
+		color: #ffffff;
+		position: absolute;
+		top: 0;
+		left: 0;
+		text-align: center;
+		display: block;
+		width: 100%;
+		height: 100px;
+	}
 
 </style>
 <form id="cv-validate" method="POST" action="{{ route('home.store') }}" enctype="multipart/form-data" class="cv-body mx-auto">
@@ -24,8 +99,9 @@
 				</ul>
 				<div class="header-left position-relative overflow-hidden col-12 col-sm-12 col-md-6 d-flex align-items-center justify-content-center justify-content-md-start align-items-md-end pb-0 pb-md-5">
 					<div class="header-left-text">
-					<input type="text" id="nameOne" class="input-bg mb-0 pl-0" name="name" value="BUMBLEBEE WALKER">
-					<input type="text" class="input-span mb-0 pl-0" name="developer" value="Ruby on Rail Developer">
+						<input type="text" id="nameOne" class="input-bg mb-0 pl-0" name="name" value="BUMBLEBEE WALKER" placeholder="Enter name...">
+						<p class="name-one"></p>
+						<input type="text" class="input-span mb-0 pl-0" name="developer" value="Ruby on Rail Developer">
 					</div>
 					<label class="icon-camera">
 						<input type="file" onchange="readURLBg(this);" name="file" class="d-none" />
@@ -48,8 +124,8 @@
 						</div>
 					</div>
 					<div class="title">
-					<input id="nameTwo" type="text" class="input-yi bumble p-0 m-0 font-weight-bold" name="name" value="BUMBLEBEE WALKER">
-					<input id="datepicker-11" class="input-yi date-time p-0" type="text" name="date" value="" placeholder="yy - mm - dd">
+						<input id="nameTwo" type="text" class="input-yi bumble p-0 m-0 font-weight-bold" name="name" value="BUMBLEBEE WALKER">
+						<input class="datepicker-11 input-yi date-time p-0" type="text" name="date" value="" placeholder="yy - mm - dd">
 						<p class="line"></p>
 					</div>
 					<div class="infor-table">
@@ -116,25 +192,7 @@
 					<h1 class="skill-hidari">PROFESSIONAL SKILLS</h1>
 					<textarea class="input-yi-table text-justin" rows="4" cols="100" width="10%" name="professional_skill_des" >Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod </textarea>
 					<div class="skill-item col-6 col-sm-4 col-md-6 col-lg-4">
-						<div class="chart-mazu" style="" data-percentage="50">
-							<div class="btn-skill-left">
-							<button id="btn-delete-skill-left" type="button">
-									<i onclick="myskillleft(this)" class="far fa-trash-alt d-flex justify-content-end">
-									</i>
-							</button>
-							</div>
-							<svg class="circle-chart" viewBox="0 0 33.83098862 33.83098862">
-								<circle class="circle-chart__background" cx="16.9" cy="16.9" r="15.9"></circle>
-								<circle class="circle-chart__circle success-stroke" stroke-dasharray="50,100" cx="16.9" cy="16.9" r="15.9"></circle>
-								<g class="circle-chart__info">
-									<text class="circle-chart__percent" x="17.9" y="15.5">
-									</text>
-								</g>
-								<span class="span-white-per-number"><input type="text" name="percent" value="50%"></span>
-								<br>
-							</svg>
-							<span class="span-white-per-text p-0 m-0" contenteditable="true">HTML/ CSS</span>
-						</div>  
+
 					</div>
 					<div class="row chart-icon">
 						<div class="col-6 col-sm-4 col-md-6 col-lg-4 btn-chart" style="">
@@ -145,7 +203,7 @@
 				<div class="skills-right col-12 col-sm-12 col-md-6">
 					<h1 class="skill-migi pt-5 pt-md-0 pt-lg-0">PERSONAL SKILLS</h1>
 					<textarea class="input-yi-table text-justin" rows="4" cols="100" width="10%" name="personal_skill_des" >Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod </textarea>
-
+					
 					<div class="team-chart ml-0 mr-md-4 ml-md-4 row">
 						<div class="btn-sumary col-md-12 text-right mt-4 pr-0">
 							<button class="btn-edit-sumary" type="button">Add Skills 
@@ -240,26 +298,26 @@
 							<div class="form-group">
 								<label class="control-label">Name: </label>
 								<div>
-									<input type="text" class="form-control input-lg" placeholder="Enter name..." name="name" value="">
+									<input type="text" class="form-control input-lg name" placeholder="Enter name..." name="name" value="">
 								</div>
 							</div>
 
 							<div class="form-group">
 								<label class="control-label">Date start: </label>
 								<div>
-									<input type="text" id="datepicker-11" name="start_date" placeholder="Year/ Month/ Day"><br>
+									<input type="text" class="datepicker datepicker-11 dateStart" name="date_start" placeholder="Year/ Month/ Day"><br>
 								</div>
 								<br>
 
 								<div class="form-group">
 									<label class="control-label">Date end: </label>
 									<div>
-										<input type="text" id="datepicker-12" name="end_date" placeholder="Year/ Month/ Day"><br>
+										<input type="text" class="datepicker-12 datepicker dateEnd" id="datepicker-12" name="date_end" placeholder="Year/ Month/ Day"><br>
 									</div>
 								</div>
 								<div class="form-group text-center">
 									<div>
-										<button type="button" class="btn btn-success" id="btn-save-infor">
+										<button type="button" class="btn btn-success btnSaveProject" id="btn-save-infor">
 											Save
 										</button>
 									</div>
@@ -336,7 +394,4 @@
 	<p>2019 Flatos.com All right reserved</p>
 </div>
 </form>
-<script type="text/javascript">
-	
-</script>
 @endsection

@@ -23,16 +23,16 @@ h1 {
   margin: 0;
   padding: 0; }
 
-#datepicker-11 {
+.datepicker-11 {
   width: 100%;
   height: 35px; }
 
-#datepicker-12 {
+.datepicker-12 {
   width: 100%;
   height: 35px; }
 
 .title-cv {
-  color: red !important;
+  color: red;
   font-size: 25px;
   font-family: Poppins; }
 

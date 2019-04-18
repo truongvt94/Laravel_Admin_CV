@@ -13,7 +13,6 @@ use App\Models\Reference;
 use App\Models\Skill;
 use App\Models\University;
 use App\Models\WorkExperince;
-use App\Http\Requests\Admin\CreateCvRequest;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -34,6 +33,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    
     public function index()
     {
         $cvs = Cv::where('user_id', Auth::user()->id)->get();
@@ -45,7 +45,7 @@ class HomeController extends Controller
         return view('cv.create');
     }
 
-    public function store(CreateCvRequest $request)
+    public function store(Request $request)
     {
         $images = '';
         $avatar = '';
@@ -81,6 +81,17 @@ class HomeController extends Controller
            'work_experience_des' => $request->work_experience_des,
            'user_id' => Auth::user()->id,
            ]);
+       /*Reference::create([
+          'avatar' => $request->avatar,
+          'content' => $request->content,
+          'cv_id' => $cvs->id
+        ]);
+       Portfolio::create([
+          'name' => $request->name,
+          'date_start' => $request->date_start,
+          'date_end' => $request->date_end,
+          'cv_id' => $cvs->id
+        ]);*/
         return redirect()->route('home.index');
     }
 
@@ -112,7 +123,8 @@ class HomeController extends Controller
     {
         $keyword = $request->input('keyword');
         $cv = Cv::where('name', 'like', "%$keyword%")
-        ->orWhere('email', 'like', "%$keyword%")->paginate(Cv::PAGINATE);
+        ->Where('user_id', Auth::user()->id)
+        ->paginate(Cv::PAGINATE);
         $data = [
             'cv' => $cv,
             'keyword' => $keyword
